@@ -34,21 +34,21 @@ def lambda_handler(event, context):
         table = dynamodb.Table(table_name)
 
         for row in reader:
-            # Clean up row (strip whitespace)
+       
             item = {k.strip(): v.strip() for k, v in row.items()}
 
-            # Ensure Partition Key (ID) and Sort Key (Name) are present
+         
             if not item.get('ID'):
-                item['ID'] = str(uuid.uuid4())  # Generate a UUID if missing
+                item['ID'] = str(uuid.uuid4())
 
             if not item.get('name'):
-                # You can decide to skip, fail, or generate a name
+                
                 raise Exception(f"Missing required 'name' in row: {item}")
 
-            # Now safe to insert into DynamoDB
+        
             table.put_item(Item=item)
 
-        # Send message to SQS to trigger file deletion
+      
         sqs_client.send_message(
             QueueUrl=SQS_QUEUE_URL,
             MessageBody=json.dumps({

@@ -44,3 +44,8 @@ resource "aws_iam_policy_attachment" "API_policy6" {
   roles      = [aws_iam_role.lambda_iam_role.name]
   policy_arn = "arn:aws:iam::aws:policy/SecretsManagerReadWrite"
 }
+resource "aws_iam_policy_attachment" "API_policy_logs" {
+  name       = "API-Lambda-logs-policy"
+  roles      = [aws_iam_role.lambda_iam_role.name]
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}

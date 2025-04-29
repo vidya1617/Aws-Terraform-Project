@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "dynamodb_secret" {
-  name        = "dynamodb_secret_terraform"
+  name        = "dynamoDB_secret_terraform1"
   description = "Secret for Dynamo"
 }
 
